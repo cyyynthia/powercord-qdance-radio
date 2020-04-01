@@ -55,7 +55,6 @@ class QDanceClient extends EventEmitter {
       this.eventSource.addEventListener('message', async msg => {
         const data = JSON.parse(msg.data);
         const coverPromise = this._getCover();
-        console.log(data);
         setTimeout(async () => {
           if (data.name === 'track') {
             this._nowPlaying({
@@ -67,7 +66,6 @@ class QDanceClient extends EventEmitter {
             this.emit('advertisement', parseInt(data.parameters.cue_time_duration.split(':').pop()) + 1);
           }
         }, data.timestamp === 0 ? 0 : Date.now() - parseInt(data.parameters.cue_time_start) + 3000);
-        console.log(msg);
       });
     };
     this.audio.addEventListener('play', subscibe);

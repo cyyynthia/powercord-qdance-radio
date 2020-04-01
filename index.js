@@ -43,7 +43,7 @@ module.exports = class QDanceRadio extends Plugin {
   async startPlugin () {
     this.loadCSS(resolve(__dirname, 'style.scss'));
     this.classes = await getModule([ 'container', 'usernameContainer' ]);
-    const instance = getOwnerInstance(await waitFor(`.${this.classes.container}`));
+    const instance = getOwnerInstance(await waitFor(`.${this.classes.container}:not(.powercord-spotify)`));
 
     await inject('qdance-radio-controls', instance.__proto__, 'render', (_, res) => {
       let og = res; // @TODO: Better Spotify integration
@@ -135,22 +135,34 @@ module.exports = class QDanceRadio extends Plugin {
                     className: 'volume',
                     onClick: e => e.stopPropagation(),
                     onMouseEnter: () => {
+                      if (this._timeout) {
+                        clearInterval(this._timeout);
+                      }
                       document.querySelector('.mediaBarProgress-1xaPtl').style.width = `${this.qdanceClient.volume * 100}%`;
                       document.querySelector('.qdance-radio-buttons').classList.add('volume-show');
                     },
                     onMouseLeave: () => {
-                      document.querySelector('.qdance-radio-buttons').classList.remove('volume-show');
+                      this._timeout = setTimeout(() => {
+                        document.querySelector('.qdance-radio-buttons').classList.remove('volume-show');
+                      }, 500);
                     }
                   }, [
                     volumeButton,
                     React.createElement(MediaBar, {
                       onDrag: v => {
-                        console.log(v);
                         this.qdanceClient.setVolume(v);
                         document.querySelector('.mediaBarProgress-1xaPtl').style.width = `${v * 100}%`;
                       },
-                      onDragEnd: () => void 0,
-                      onDragStart: () => void 0,
+                      onDragEnd: () => {
+                        this._timeout = setTimeout(() => {
+                          document.querySelector('.qdance-radio-buttons').classList.remove('volume-show');
+                        }, 500);
+                      },
+                      onDragStart: () => {
+                        if (this._timeout) {
+                          clearInterval(this._timeout);
+                        }
+                      },
                       type: 'VOLUME',
                       value: 0,
                       currentWindow: window
