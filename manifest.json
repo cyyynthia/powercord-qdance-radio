@@ -1,0 +1,8 @@
+{
+  "name": "Q-Dance Radio",
+  "version": "1.0.0",
+  "description": "Plugin for fellow hardstyle lovers. Plays Q-Dance radio in Discord with a small control box.",
+  "author": "Bowser65",
+  "optionalDependencies": [ "pc-spotify" ],
+  "license": "BSD-3-Clause"
+}

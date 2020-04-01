@@ -1,0 +1,125 @@
+/*!
+ * Copyright (c) 2020 Bowser65, All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software without
+ *    specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+.qdance-radio {
+  --qdance-brand: linear-gradient(271deg, #e54114, #e8620b 47%, #f49b05);
+  --qdance-brand-double: linear-gradient(271deg, #f49b05, #e8620b 24%, #e54114 50%, #e8620b 74%, #f49b05);
+
+  &-header {
+    box-sizing: border-box;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 6px 8px 0;
+    margin-bottom: -4px;
+    text-transform: uppercase;
+    background-image: var(--qdance-brand-double);
+    width: 214px;
+
+    &.ad {
+      animation: qdance-radio-ad 1s linear infinite;
+    }
+  }
+
+  &-header, .fas {
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  &-controls {
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-image: var(--qdance-brand);
+    }
+  }
+
+  &-cover {
+    cursor: initial !important;
+    border-radius: 4px;
+
+    &:hover {
+      opacity: 1 !important;
+    }
+  }
+
+  &-buttons {
+    &.volume-show .volume > div {
+      display: flex;
+    }
+
+    .volume {
+      position: relative;
+
+      > div {
+        display: none;
+        position: absolute;
+        right: -27px;
+        bottom: 48px;
+      }
+
+      button:hover {
+        background-color: transparent;
+      }
+
+      .mediaBarProgress-1xaPtl {
+        background: var(--qdance-brand);
+      }
+
+      .mediaBarProgress-1xaPtl:before {
+        background-color: #f49b05;
+      }
+
+      .mediaBarGrabber-1FqnbN, .mediaBarProgress-1xaPtl:after {
+        background-color: #e54114;
+      }
+    }
+  }
+
+  .fas {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: var(--qdance-brand);
+  }
+}
+
+@keyframes qdance-radio-ad {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: 214px;
+  }
+}
